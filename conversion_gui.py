@@ -6,6 +6,24 @@ import re
 def clean(n):
     c = re.sub(u"([^\u0030-\u0039\u0041-\u005a\u0061-\u007a])","",n)
     return c
+
+
+def clean_b(n):
+    g = re.sub('[a-zA-Z2-9]+',"",n)
+    return g
+
+def clean_o(n):
+    g = re.sub('[a-zA-Z89]+',"",n)
+    return g
+
+def clean_d(n):
+    g = re.sub('[a-zA-Z]+',"",n)
+    return g
+
+def clean_h(n):
+    g = re.sub('[g-zG-Z]+',"",n)
+    return g
+
 def convert(event):
     global up
     global dw
@@ -23,13 +41,17 @@ def convert(event):
         result.set('No negative number')
     else:
         if a == 'b':
-            e= conversion.b_t_d(str(d))
+            g = clean_b(d)
+            e= conversion.b_t_d(str(g))
         elif a == 'o':
-            e= conversion.o_t_d(str(d))
+            g = clean_o(d)
+            e= conversion.o_t_d(str(g))
         elif a == 'd':
-            e= int(d)
+            g = clean_d(d)
+            e= g
         elif a == 'h':
-            e = conversion.h_t_d(str(d))
+            g = clean_h(d)
+            e = conversion.h_t_d(str(g))
         
         if b == 'b':
             f = conversion.d_t_b(e)
